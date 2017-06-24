@@ -1,0 +1,22 @@
+{
+  "name": "angular-autosize",
+  "version": "0.0.0",
+  "description": "Automatically resize textarea height based on its content",
+  "main": "index.ts",
+  "keywords": [
+    "angular",
+    "@angular",
+    "autosize",
+    "autoheight",
+    "textarea",
+    "input"
+  ],
+  "author": "Alex Shevchenko",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/core": "^4.2.4"
+  },
+  "devDependencies": {
+    "typescript": "^2.3.4"
+  }
+}
