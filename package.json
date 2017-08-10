@@ -12,13 +12,14 @@
     "@angular",
     "autosize",
     "autoheight",
+    "expand",
     "textarea",
+    "material",
     "input"
   ],
   "author": "Alex Shevchenko <shevaroller@gmail.com> (http://shevaroller.me)",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "@angular/core": "^4.2.4",
     "typescript": "^2.3.4"

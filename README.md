@@ -1,6 +1,6 @@
 # angular-autosize
-Automatically resizes textarea height based on its content while preserving textarea width.
-Works as a textarea directive for any Angular 2+ application.
+Directive to automatically resize a textarea to fit its content.
+The most comprehensive Angular 2+ textarea directive that follows material standards.
 
 ## Installation
 ```
@@ -21,6 +21,11 @@ import { AutosizeDirective } from 'angular-autosize';
 2) Use the directive inside a textarea element in HTML:
 ```
 <textarea autosize>Autosized textarea for Angular 2 and above</textarea>
+```
+
+3) Optionally, specify minRows and maxRows boundaries
+```
+<textarea autosize autosizeMinRows="5" autosizeMaxRows="10">Autosized textarea that expands from 5 to 10 rows</textarea>
 ```
 
 ## License

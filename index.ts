@@ -1,1 +1,1 @@
-export { AutosizeDirective } from './src/angular-autosize.directive';
+export { AutosizeDirective } from './src/autosize.directive';
