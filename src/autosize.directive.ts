@@ -64,7 +64,7 @@ export class AutosizeDirective implements AfterViewInit {
   /** Sets the minimum height of the textarea as determined by minRows. */
   _setMinHeight(): void {
     const minHeight = this.minRows && this._cachedLineHeight ?
-        `${(this.minRows * this._cachedLineHeight)}px` : null;
+        `${this.minRows * this._cachedLineHeight}px` : null;
 
     if (minHeight) {
       this._setTextareaStyle('minHeight', minHeight);
@@ -74,7 +74,7 @@ export class AutosizeDirective implements AfterViewInit {
   /** Sets the maximum height of the textarea as determined by maxRows. */
   _setMaxHeight(): void {
     const maxHeight = this.maxRows && this._cachedLineHeight ?
-        `${(this.maxRows * this._cachedLineHeight)}px` : null;
+        `${this.maxRows * this._cachedLineHeight}px` : null;
 
     if (maxHeight) {
       this._setTextareaStyle('maxHeight', maxHeight);
@@ -145,7 +145,7 @@ export class AutosizeDirective implements AfterViewInit {
 
     // Reset the textarea height to auto in order to shrink back to its default size.
     textarea.style.height = 'auto';
-    
+
     // Use the scrollHeight to know how large the textarea *would* be if fit its entire value.
     textarea.style.height = `${textarea.scrollHeight + this._cachedBorder}px`;
 
