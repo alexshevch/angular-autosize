@@ -16,8 +16,8 @@ import { NgControl } from '@angular/forms';
  */
 @Directive({
   selector: 'textarea[textareaAutosize],' +
-            'textarea[autosize]', 
-  exportAs: 'TextareaAutosize'
+            'textarea[autosize]',
+  exportAs: 'TextareaAutosize',
 })
 export class AutosizeDirective implements AfterViewInit {
   /** Keep track of the previous textarea value to avoid resizing when the value hasn't changed. */
@@ -64,7 +64,7 @@ export class AutosizeDirective implements AfterViewInit {
   /** Sets the minimum height of the textarea as determined by minRows. */
   _setMinHeight(): void {
     const minHeight = this.minRows && this._cachedLineHeight ?
-      `${(this.minRows * this._cachedLineHeight)}px` : null;
+        `${(this.minRows * this._cachedLineHeight)}px` : null;
 
     if (minHeight) {
       this._setTextareaStyle('minHeight', minHeight);
@@ -74,7 +74,7 @@ export class AutosizeDirective implements AfterViewInit {
   /** Sets the maximum height of the textarea as determined by maxRows. */
   _setMaxHeight(): void {
     const maxHeight = this.maxRows && this._cachedLineHeight ?
-      `${(this.maxRows * this._cachedLineHeight)}px` : null;
+        `${(this.maxRows * this._cachedLineHeight)}px` : null;
 
     if (maxHeight) {
       this._setTextareaStyle('maxHeight', maxHeight);
@@ -95,7 +95,7 @@ export class AutosizeDirective implements AfterViewInit {
   /**
    * Cache the height of a single-row textarea.
    *
-   * We need to know how large a single 'row' of a textarea is in order to apply minRows and
+   * We need to know how large a single "row" of a textarea is in order to apply minRows and
    * maxRows. For the initial version, we will assume that the height of a single line in the
    * textarea does not ever change.
    */
@@ -145,14 +145,7 @@ export class AutosizeDirective implements AfterViewInit {
 
     // Reset the textarea height to auto in order to shrink back to its default size.
     textarea.style.height = 'auto';
-
-    const computedStyle = getComputedStyle(textarea);
-    const borderTop = Number(computedStyle.getPropertyValue('border-top-width')
-      .replace('px', '')) || 0;
-
-    const borderBottom = Number(computedStyle.getPropertyValue('border-bottom-width')
-      .replace('px', '')) || 0;
-
+    
     // Use the scrollHeight to know how large the textarea *would* be if fit its entire value.
     textarea.style.height = `${textarea.scrollHeight + this._cachedBorder}px`;
 
