@@ -29,12 +29,14 @@ export class AutosizeDirective implements AfterViewInit {
   /** Cached height of a textarea with a single row. */
   private _cachedLineHeight: number;
 
+  private _cachedBorder: number;
+
   // Textarea elements that have the directive applied should have a single row by default.
   // Browsers normally show two rows by default and therefore this limits the minRows binding.
   @HostBinding('attr.rows') '1';
 
   @HostListener('input') onTextareaInput() {
-   this.resizeToFitContent();
+    this.resizeToFitContent();
   }
 
   @Input('autosizeMinRows')
@@ -47,6 +49,7 @@ export class AutosizeDirective implements AfterViewInit {
 
   @Input('autosizeMaxRows')
   get maxRows() { return this._maxRows; }
+
   set maxRows(value: number) {
     this._maxRows = value;
     this._setMaxHeight();
@@ -56,7 +59,6 @@ export class AutosizeDirective implements AfterViewInit {
     if (formControl && formControl.valueChanges) {
       formControl.valueChanges.subscribe(() => this.resizeToFitContent());
     }
-    console.log('textarea check');
   }
 
   /** Sets the minimum height of the textarea as determined by minRows. */
@@ -64,7 +66,7 @@ export class AutosizeDirective implements AfterViewInit {
     const minHeight = this.minRows && this._cachedLineHeight ?
         `${this.minRows * this._cachedLineHeight}px` : null;
 
-    if (minHeight)  {
+    if (minHeight) {
       this._setTextareaStyle('minHeight', minHeight);
     }
   }
@@ -119,6 +121,16 @@ export class AutosizeDirective implements AfterViewInit {
     this._cachedLineHeight = textareaClone.clientHeight;
     textarea.parentNode!.removeChild(textareaClone);
 
+    // Calculate the border to take it into account when setting height
+    const style = getComputedStyle(textarea);
+
+    const borderTop = Number(style.getPropertyValue('border-top-width')
+      .replace('px', '')) || 0;
+    const borderBottom = Number(style.getPropertyValue('border-bottom-width')
+      .replace('px', '')) || 0;
+
+    this._cachedBorder = borderTop + borderBottom;
+
     // Min and max heights have to be re-calculated if the cached line height changes
     this._setMinHeight();
     this._setMaxHeight();
@@ -135,7 +147,7 @@ export class AutosizeDirective implements AfterViewInit {
     textarea.style.height = 'auto';
 
     // Use the scrollHeight to know how large the textarea *would* be if fit its entire value.
-    textarea.style.height = `${textarea.scrollHeight}px`;
+    textarea.style.height = `${textarea.scrollHeight + this._cachedBorder}px`;
 
     this._previousValue = textarea.value;
   }
